@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import { EffectComposer, RenderPass, EffectPass } from "postprocessing";
+const THREE = window.THREE;
+const { EffectComposer, RenderPass, EffectPass } = POSTPROCESSING;
 
 class WaterTexture {
   constructor(options = { debug: false }) {
