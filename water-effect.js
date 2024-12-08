@@ -1,5 +1,10 @@
-const THREE = window.THREE;
-const { EffectComposer, RenderPass, EffectPass } = POSTPROCESSING;
+ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js";
+import {
+  Effect,
+  EffectComposer,
+  RenderPass,
+  EffectPass
+} from "https://cdn.jsdelivr.net/npm/postprocessing@6.28.4/build/postprocessing.esm.js";
 
 class WaterTexture {
   constructor(options = { debug: false }) {
@@ -141,16 +146,19 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".ref_item-img");
+  const items = document.querySelectorAll(".ref_item-img");
 
-  images.forEach((img) => {
-    const width = img.offsetWidth;
-    const height = img.offsetHeight;
+  items.forEach((item) => {
+    const img = item.querySelector(".ref-main_img"); // L'image principale
+    const imgSrc = img.src; // Obtenir le chemin de l'image
+    const width = item.offsetWidth;
+    const height = item.offsetHeight;
 
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
-    img.parentNode.replaceChild(canvas, img);
+
+    item.replaceChild(canvas, img);
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(width, height);
@@ -167,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     camera.position.z = 10;
 
-    const texture = new THREE.TextureLoader().load(img.dataset.src);
+    const texture = new THREE.TextureLoader().load(imgSrc);
 
     const geometry = new THREE.PlaneBufferGeometry(width, height);
     const material = new THREE.MeshBasicMaterial({ map: texture });
