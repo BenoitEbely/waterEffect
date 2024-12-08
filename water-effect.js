@@ -1,10 +1,5 @@
- import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js";
-import {
-  Effect,
-  EffectComposer,
-  RenderPass,
-  EffectPass
-} from "https://cdn.jsdelivr.net/npm/postprocessing@6.28.4/build/postprocessing.esm.js";
+const THREE = window.THREE;
+const { Effect, EffectComposer, RenderPass, EffectPass } = POSTPROCESSING;
 
 class WaterTexture {
   constructor(options = { debug: false }) {
